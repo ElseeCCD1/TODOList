@@ -12,7 +12,7 @@ class AddTaskModal extends Component {
     super(props);
 
     this.state = {
-      id: this.props.tasks.length + 1,
+      id: this.props.tasks[this.props.tasks.length-1].id + 1,
       text: '',
       date: new Date()
     }
@@ -37,7 +37,7 @@ class AddTaskModal extends Component {
   }
 
   render() {
-    const {toggleAddTaskModalOpened} = this.props;
+    const toggleAddTaskModalOpened = this.props.toggleAddTaskModalOpened;
 
     return (
       <Modal>
@@ -55,7 +55,7 @@ class AddTaskModal extends Component {
             showTimeSelect
             timeFormat="HH:mm"
             timeIntervals={30}
-            timeCaption="time"
+            timeCaption="Time"
             dateFormat="MMMM d, yyyy HH:mm"
           />
         </div>

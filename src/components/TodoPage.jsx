@@ -27,15 +27,15 @@ class TodoPage extends Component {
     this.setState({tasks: clonedTasks});
   }
 
-  deleteTask = async (taskId) => {
-    await fetch( `http://localhost:4000/tasks/${taskId}`,{
+  deleteTask = async () => {
+    await fetch( `http://localhost:4000/tasks/${this.state.taskIdToDelete}`,{
       method: 'DELETE',
       headers: {
         'Accept': 'application/json; charset=utf-8',
         'Content-Type': 'application/json; charset=utf-8'
       }
     });
-    const tasksWithRemovedItem = this.state.tasks.filter(task => task.id !== taskId);
+    const tasksWithRemovedItem = this.state.tasks.filter(task => task.id !== this.state.taskIdToDelete);
     this.setState({tasks: tasksWithRemovedItem});
     this.toggleDeleteTaskModalOpened();
   }
@@ -59,7 +59,6 @@ class TodoPage extends Component {
         {this.state.isDeleteTaskModalOpened && (
           <DeleteTaskModal
             toggleDeleteTaskModalOpened={this.toggleDeleteTaskModalOpened}
-            taskIdToDelete={this.state.taskIdToDelete}
             deleteTask={this.deleteTask}
           />
         )}
